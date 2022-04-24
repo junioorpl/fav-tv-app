@@ -4,6 +4,7 @@ const showAPI = (axios: AxiosInstance) => {
   return {
     fetchShows: (page: number) => axios.get(`shows?page=${page}`),
     searchShows: (name: string) => axios.get(`search/shows?q=${name}`),
+    searchPeople: (name: string) => axios.get(`search/people?q=${name}`),
     searchCastShows: (id: number) =>
       axios.get(`people/${id}/castcredits?embed=show`),
     fetchShowById: (id: number) =>

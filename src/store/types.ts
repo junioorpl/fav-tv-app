@@ -128,9 +128,37 @@ export interface MovieProps {
   };
 }
 
+export interface PeopleProps {
+  id: number;
+  url: string;
+  name: string;
+  country: {
+    name: string;
+    code: string;
+    timezone: string;
+  };
+  birthday: string;
+  deathday: string | null;
+  gender: string;
+  image: {
+    medium: string;
+    original: string;
+  };
+  updated: number;
+  _links: {
+    self: {
+      href: string;
+    };
+  };
+}
+
 export interface SearchedMovieProps {
   score: number;
   show: MovieProps;
+}
+export interface SearchedPeopleProps {
+  score: number;
+  person: PeopleProps;
 }
 
 export interface FavoriteShow {
@@ -143,6 +171,7 @@ export interface FavoriteShow {
 export interface MoviesState {
   movies: MovieProps[][];
   searchedMovies: MovieProps[];
+  searchedPeople: SearchedPeopleProps[];
   castMovies: MovieProps[];
   favorites: FavoriteShow[];
   selectedMovie: MovieProps | null;

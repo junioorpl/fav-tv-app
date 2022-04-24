@@ -5,6 +5,7 @@ import {
   handleFetchMovies,
   handleSearchCastMovies,
   handleSearchMovies,
+  handleSearchPeople,
 } from '../actions/movies';
 
 import {MoviesState} from '../types';
@@ -12,6 +13,7 @@ import {MoviesState} from '../types';
 const initialState: MoviesState = {
   movies: [],
   searchedMovies: [],
+  searchedPeople: [],
   castMovies: [],
   favorites: [],
   selectedMovie: null,
@@ -86,6 +88,21 @@ export const MoviesSlice = createSlice({
       state.errorMessage = action.payload;
     });
     builder.addCase(handleSearchMovies.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(handleSearchPeople.fulfilled, (state, action) => {
+      state.searchedPeople = action.payload.searchedPeople;
+
+      state.hasError = false;
+      state.errorMessage = '';
+      state.loading = false;
+    });
+    builder.addCase(handleSearchPeople.rejected, (state, action) => {
+      state.loading = false;
+      state.hasError = true;
+      state.errorMessage = action.payload;
+    });
+    builder.addCase(handleSearchPeople.pending, state => {
       state.loading = true;
     });
     builder.addCase(handleFetchMovieById.fulfilled, (state, action) => {

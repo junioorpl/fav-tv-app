@@ -51,6 +51,20 @@ export const handleSearchMovies = createAsyncThunk(
   },
 );
 
+export const handleSearchPeople = createAsyncThunk(
+  'movies/peopleSearch',
+  async (searchTerm: string, thunkAPI): Promise<any> => {
+    try {
+      const {data} = await createAPI().show.searchPeople(searchTerm);
+
+      return thunkAPI.fulfillWithValue({searchedPeople: data});
+    } catch (err: any) {
+      console.log('🚀 ~ file: profile.ts ~ line 12 ~ err', err);
+      return thunkAPI.rejectWithValue('Error retrieving selected show');
+    }
+  },
+);
+
 export const handleSearchCastMovies = createAsyncThunk(
   'movies/castSearch',
   async (id: number, thunkAPI): Promise<any> => {
